@@ -11,6 +11,7 @@
         public string fatherName { get; set; }
         public string motherName { get; set; }
         public string mobileNo { get; set; }
+        public string gender { get; set; }
     }
     public class BulkStudentInsert
     {
@@ -21,6 +22,7 @@
         public string fatherName { get; set; }
         public string motherName { get; set; }
         public string mobileNo { get; set; }
+        public string gender { get; set; }
 
     }
     public class SchoolClass : BaseModel
@@ -32,6 +34,7 @@
         public string fatherName { get; set; }
         public string motherName { get; set; }
         public string mobileNo { get; set; }
+        public string gender { get; set; }
         public List<Student> studentlist { get; set; }
     }
     public class Student 
@@ -41,6 +44,7 @@
         public string fatherName { get; set; }
         public string motherName { get; set; }
         public string mobileNo { get; set; }
+        public string gender { get; set; }
     }
     public class GetStudentsPagi
     {

@@ -20,9 +20,9 @@ namespace SchoolManagment.Repository
             int result = 0;
             var query = @"insert into tblStudents 
            
-              (studName,DOB,schoolId,classId,fatherName,motherName,mobileNo,createdBy,createdDate,isDeleted)
+              (studName,DOB,schoolId,classId,fatherName,motherName,mobileNo,createdBy,createdDate,isDeleted,gender)
 
-              Values(@studName,@DOB,@schoolId,@classId,@fatherName,@motherName,@mobileNo,@createdBy,GetDate(),0);
+              Values(@studName,@DOB,@schoolId,@classId,@fatherName,@motherName,@mobileNo,@createdBy,GetDate(),0,@gender);
 
                SELECT CAST(SCOPE_IDENTITY() as int)";
 
@@ -51,9 +51,9 @@ namespace SchoolManagment.Repository
             var result = 0;
             var query = @"insert into tblStudents 
            
-              (studName,DOB,schoolId,classId,fatherName,motherName,mobileNo,createdBy,createdDate,isDeleted)
+              (studName,DOB,schoolId,classId,fatherName,motherName,mobileNo,createdBy,createdDate,isDeleted,gender)
 
-              Values(@studName,@DOB,@schoolId,@classId,@fatherName,@motherName,@mobileNo,@createdBy,GetDate(),0)";
+              Values(@studName,@DOB,@schoolId,@classId,@fatherName,@motherName,@mobileNo,@createdBy,GetDate(),0,@gender)";
             studlist = studentmodel.studentlist;
 
             using(var connection=_dapperContext.CreateConnection())
@@ -69,6 +69,7 @@ namespace SchoolManagment.Repository
                     studentmodel.DOB= student.DOB;
 
                     studentmodel.mobileNo= student.mobileNo;
+                    studentmodel.gender= student.gender;
 
                     result =await connection.ExecuteAsync(query, studentmodel);
                 }
@@ -82,7 +83,7 @@ namespace SchoolManagment.Repository
             var result = 0;
             var query = @"update tblStudents set studName=@studName,DOB=@DOB,schoolId=@schoolId,
 
-            classId=@classId,fatherName=@fatherName,motherName=@motherName,mobileNo=@mobileNo,modifiedBy=@modifiedBy,modifiedDate=@modifiedDate where Id=@Id";
+            classId=@classId,fatherName=@fatherName,motherName=@motherName,mobileNo=@mobileNo,modifiedBy=@modifiedBy,modifiedDate=@modifiedDate gender=@gender where Id=@Id";
             using(var connection=_dapperContext.CreateConnection())
             {
                 var checkquery = @"select * from tblStudents where studName=@studName 

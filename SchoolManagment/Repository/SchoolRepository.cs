@@ -235,6 +235,7 @@ namespace SchoolManagment.Repository
 
                                 where sch.Id=@schoolId";
 
+
             var querystudents = @"select std.Id,std.studName,std.DOB,std.gender,c.class as className,std.mobileNo
 
                                 from tblSchools sch 

@@ -281,5 +281,49 @@ namespace SchoolManagment.Controllers
             }
 
         }
+        [HttpGet("/GetSchoolDetails")]
+        public async Task<IActionResult> GetSchoolDetails(int schoolId)
+        {
+            BaseResponseStatus baseResponse = new BaseResponseStatus();
+
+            try
+            {
+
+
+                var result = await _schoolRepository.GetSchoolDetails(schoolId);
+                if (result != null)
+                {
+                    var rtnmsg = string.Format($"All Records Fetch Successfully...!");
+                    logger.LogInformation(rtnmsg);
+                    logger.LogDebug(string.Format($"SchoolsController : completed schools records fetchign"));
+                    baseResponse.StatusCode = StatusCodes.Status200OK.ToString();
+                    baseResponse.StatusMessage = (rtnmsg);
+                    baseResponse.ResponseData = result;
+                    return Ok(baseResponse);
+
+                }
+                else
+                {
+                    var rtnmsg = string.Format($"No Records Found..!");
+                    baseResponse.StatusCode = StatusCodes.Status400BadRequest.ToString();
+                    baseResponse.StatusMessage = rtnmsg;
+                    baseResponse.ResponseData = "empty";
+                    return Ok(baseResponse);
+                }
+            }
+            catch (Exception ex)
+            {
+                //log error
+                logger.LogError(ex.Message);
+                var returnMsg = string.Format(ex.Message);
+                logger.LogInformation(returnMsg);
+                baseResponse.StatusCode = StatusCodes.Status409Conflict.ToString();
+                baseResponse.StatusMessage = returnMsg;
+                return Ok(baseResponse);
+
+            }
+
+
+        }
     }
 }

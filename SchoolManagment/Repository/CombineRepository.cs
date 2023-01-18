@@ -61,8 +61,9 @@ namespace SchoolManagment.Repository
                 var values = new { exYears = noOfyears, period = yearOrmonth, salary = salary };
 
                 var result = await connection.QueryAsync<Teachers>(query, values);
-
-                return result.ToList();
+               
+                    return result.ToList();
+                
             }
 
         }

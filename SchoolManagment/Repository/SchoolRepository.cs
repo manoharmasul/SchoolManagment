@@ -209,5 +209,65 @@ namespace SchoolManagment.Repository
             }
 
         }
+
+        public async Task<SchoolDetails> GetSchoolDetails(int schoolId)
+        {
+            List<SchoolDetails> schoollist=new List<SchoolDetails>();
+            SchoolDetails schooldeatails=new SchoolDetails();
+
+
+
+            var queryschools = @"select sch.Id,sch.sName,sch.vilageName,t.talukaName,d.districtName
+
+                                  from tblSchools sch inner join tblTaluka t on sch.talukaId=t.Id
+
+                                  inner join tblDistrict d on t.districtId=d.Id where sch.Id=@schoolId";
+
+            var queryteacher = @"select tea.Id,tea.tName,tea.salary,sub.subjectName,tea.experience
+
+                                from tblSchools sch inner join tblTaluka t on sch.talukaId=t.Id
+
+                                inner join tblDistrict d on t.districtId=d.Id
+
+                                inner join tblTeachers tea on sch.Id=tea.schoolId 
+
+                                inner join tblSubjects sub on tea.subjectId=sub.Id
+
+                                where sch.Id=@schoolId";
+
+            var querystudents = @"select std.Id,std.studName,std.DOB,std.gender,c.class as className,std.mobileNo
+
+                                from tblSchools sch 
+
+                                inner join tblTaluka t on sch.talukaId=t.Id
+
+                                inner join tblDistrict d on t.districtId=d.Id
+
+                                inner join tblStudents std on sch.Id=std.schoolId
+
+                                inner join tblClass c on std.classId=c.Id
+
+                                where sch.Id=@schoolId";
+            using(var connection =_dapperContext.CreateConnection())
+            {
+                var school = await connection.QuerySingleOrDefaultAsync<SchoolDetails>(queryschools,new {schoolId=schoolId});
+                var students = await connection.QueryAsync<GetStudentsPagi>(querystudents, new { schoolId = schoolId });
+                var teachers = await connection.QueryAsync<TeachersDetails>(queryteacher, new { schoolId = schoolId });
+                var item1 = school;
+            
+               
+                    schooldeatails.Id= school.Id;
+                    schooldeatails.sName= school.sName;
+                    schooldeatails.vilageName= school.vilageName;
+                    schooldeatails.talukaName= school.talukaName;
+                    schooldeatails.districtName= school.vilageName;                 
+               
+                schooldeatails.teacherlist = teachers.ToList();
+                schooldeatails.studentlist = students.ToList();
+
+               
+            }
+            return schooldeatails;  
+        }
     }
 }

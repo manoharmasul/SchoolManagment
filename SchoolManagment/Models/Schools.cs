@@ -18,16 +18,11 @@ namespace SchoolManagment.Models
     }
     public class SchoolsPaginationModel
     {
-
         public int SrNO { get; set; }
-
         public int schoolId { get; set; }
         public string sName { get; set; }
-
         public string vilageName { get; set; }
-
-        public string talukaName { get; set; }
-    
+        public string talukaName { get; set; }  
         public string districtName { get; set; }
     }
     public class NoOfSchoolsByPopulations
@@ -37,4 +32,17 @@ namespace SchoolManagment.Models
         public int No_of_schools { get; set; }
 
     }
+    public class SchoolDetails
+    {
+        public int SrNO { get; set; }
+        public int Id { get; set; }
+        public string sName { get; set; }
+        public string vilageName { get; set; }
+        public string talukaName { get; set; }
+        public string districtName { get; set; }
+        public List<TeachersDetails>  teacherlist{ get; set; }
+        public List<GetStudentsPagi>  studentlist{ get; set; }
+
+    }
+
 }

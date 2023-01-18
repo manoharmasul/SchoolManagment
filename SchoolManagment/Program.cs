@@ -9,6 +9,7 @@ builder.Services.AddSingleton<DapperContext>();
 builder.Services.AddSingleton<ISchoolRepository, SchoolRepository>();
 builder.Services.AddSingleton<ICombineRepository, CombineRepository>();
 builder.Services.AddSingleton<ITeacherAsyncRepository,TeacherAsyncRepository>();
+builder.Services.AddSingleton<IStudentsRepository,StudentRepository>();
 
 
 builder.Services.AddControllers();

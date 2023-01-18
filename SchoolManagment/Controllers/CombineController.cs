@@ -48,15 +48,15 @@ namespace SchoolManagment.Controllers
             else
             {
 
-              var rtnmsg = string.Format($"Somthing is Worng");
+                var rtnmsg = string.Format($"Something is Wrong");
 
-              baseresponse.StatusCode= StatusCodes.Status409Conflict.ToString();
+                baseresponse.StatusCode = StatusCodes.Status409Conflict.ToString();
 
-              baseresponse.StatusMessage = rtnmsg;
+                baseresponse.StatusMessage= rtnmsg;
 
-              baseresponse.ResponseData = 0;
+                baseresponse.ResponseData = 0;
 
-              return Ok(baseresponse);
+                return Ok(baseresponse);
 
             }
 

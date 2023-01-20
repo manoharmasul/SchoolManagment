@@ -6,6 +6,7 @@
         public DateTime createdDate { get; set; }
         public int modifiedBy { get; set; }
         public DateTime modifiedDate { get; set; }
+        public bool isDeleted { get; set; }
         public string CreatedDateFormatdate
         {
             get
